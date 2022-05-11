@@ -1,6 +1,13 @@
 riscv-tests
 ================
 
+About this fork
+-----------------
+
+Disclaimer:
+
+The RVV tests are heavily inspired by: https://github.com/pulp-platform/ara/tree/main/apps/riscv-tests
+
 About
 -----------
 
