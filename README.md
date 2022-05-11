@@ -8,6 +8,15 @@ Disclaimer:
 
 The RVV tests are heavily inspired by: https://github.com/pulp-platform/ara/tree/main/apps/riscv-tests
 
+TODO:
+
+- [ ] Fix 64 bit compilation (needs memcpy??)
+- [ ] Also include ARA benchmark programs?
+- [ ] Port to rv32uv
+- [ ] Reuse code
+- [ ] Fix tests which are commented out
+- [ ] Run tests in spike
+
 About
 -----------
 
