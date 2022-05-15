@@ -84,8 +84,8 @@ endef
 
 define compile_template_c
 
-$$($(1)_p_tests): $(1)-p-%: $(1)/%.c
-	$$(RISCV_GCC) $(2) $$(RISCV_GCC_OPTS) -I$(src_dir)/../env/p -I$(src_dir)/macros/scalar -I$(src_dir)/macros/vector -T$(src_dir)/../env/p/link.ld $$< -o $$@
+$$($(1)_p_tests): $(1)-p-%: $(1)/%.c $(wildcard $(src_dir)/../benchmarks/common/*)
+	$$(RISCV_GCC) $(2) $$(RISCV_GCC_OPTS) -I$(src_dir)/../env/p -I$(src_dir)/macros/scalar -I$(src_dir)/macros/vector -T$(src_dir)/../benchmarks/common/test.ld $$< -o $$@ $(wildcard $(src_dir)/../benchmarks/common/*.S) -I$(src_dir)/../env/ $(wildcard $(src_dir)/../benchmarks/common/*.c)
 $(1)_tests += $$($(1)_p_tests)
 
 $$($(1)_v_tests): $(1)-v-%: $(1)/%.c
