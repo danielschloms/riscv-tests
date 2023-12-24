@@ -1,0 +1,108 @@
+// See LICENSE for license details.
+
+//**************************************************************************
+// Vector-vector add benchmark
+//--------------------------------------------------------------------------
+// Author  : Andrew Waterman
+// TA      : Christopher Celio
+// Student :
+//
+// This benchmark adds two vectors and writes the results to a
+// third vector. The input data (and reference data) should be
+// generated using the vvadd_gendata.pl perl script and dumped
+// to a file named dataset.h
+
+//--------------------------------------------------------------------------
+// Includes
+
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+
+//--------------------------------------------------------------------------
+// Input/Reference Data
+
+#include "dataset.h"
+
+
+//--------------------------------------------------------------------------
+// Basic Utilities and Multi-thread Support
+
+#include "util.h"
+
+
+//--------------------------------------------------------------------------
+// vvadd function
+
+extern void __attribute__((noinline)) vvadd(int coreid, int ncores, size_t n, const data_t* x, const data_t* y, data_t* z);
+
+
+//--------------------------------------------------------------------------
+// Main
+//
+// all threads start executing thread_entry(). Use their "coreid" to
+// differentiate between threads (each thread is running on a separate core).
+
+volatile static int idle = 1;
+void thread_entry(int cid, int nc) {
+  static data_t results_data[DATA_SIZE];
+  printf("cid=%d nc=%d\n", cid, nc);
+  static int done = 0;
+  // stats(vvadd(1, 1, DATA_SIZE, input1_data, input2_data, results_data), DATA_SIZE);
+  barrier(nc);
+  if(cid == 0) {
+    // stats(vvadd(1, 1, DATA_SIZE, input1_data, input2_data, results_data), DATA_SIZE);
+    printf("compute\n");
+    idle = 0;
+  //   barrier(nc);
+  //   stats(vvadd(cid, nc, DATA_SIZE, input1_data, input2_data, results_data); barrier(nc), DATA_SIZE);
+  //   barrier(nc);
+  //   while(idle) {
+  //     printf("join\n");
+  //   }
+  //   idle = 1;
+  //   stats(vvadd(1, 1, DATA_SIZE, input1_data, input2_data, results_data), DATA_SIZE);
+  } else {
+    while(idle) {
+      printf("wait\n");
+    }
+  //   barrier(nc);
+  //   stats(vvadd(cid, nc, DATA_SIZE, input1_data, input2_data, results_data); barrier(nc), DATA_SIZE);
+  //   barrier(nc);
+  //   done = 1;
+  //   while(idle) {
+  //     printf("wait2\n");
+  //   }
+  }
+  // barrier(nc);
+  // // static allocates data in the binary, which is visible to both threads
+  //
+  // // First do out-of-place vvadd
+  // barrier(nc);
+  // stats(vvadd(cid, nc, DATA_SIZE, input1_data, input2_data, results_data); barrier(nc), DATA_SIZE);
+
+  // if(cid == 0) {
+  //   int res = verifyDouble(DATA_SIZE, results_data, verify_data);
+  //   if(res) exit(res);
+  // }
+
+  // // Second do in-place vvadd
+  // // Copying input
+  // size_t i;
+  // if(cid == 0) {
+  //   for (i = 0; i < DATA_SIZE; i++)
+  //         results_data[i] = input1_data[i];
+  // }
+  // barrier(nc);
+  // stats(vvadd(cid, nc, DATA_SIZE, results_data, input2_data, results_data); barrier(nc), DATA_SIZE);
+
+  // if(cid == 0) {
+  //   int res = verifyDouble(DATA_SIZE, results_data, verify_data);
+  //   if(res) exit(res);
+  // }
+  //
+  // printf("end\n");
+  barrier(nc);
+  exit(0);
+}
