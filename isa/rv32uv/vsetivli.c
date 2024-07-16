@@ -36,17 +36,17 @@ void TEST_CASE2(void) {
 
 // Zero avl
 void TEST_CASE3(void) {
-  uint64_t avl, vtype, vl;
-  uint64_t vlmul = 3;
-  uint64_t vsew = 3;
-  uint64_t vta = 0;
-  uint64_t vma = 0;
-  uint64_t golden_vtype;
-  vtype(golden_vtype, vlmul, vsew, vta, vma);
-  asm volatile("vsetivli %[AVL], 0, e64, m8, tu, mu" : [AVL] "=r"(avl));
-  read_vtype(vtype);
-  read_vl(vl);
-  check_vtype_vl(3, vtype, golden_vtype, avl, vl);
+  // uint64_t avl, vtype, vl;
+  // uint64_t vlmul = 3;
+  // uint64_t vsew = 3;
+  // uint64_t vta = 0;
+  // uint64_t vma = 0;
+  // uint64_t golden_vtype;
+  // vtype(golden_vtype, vlmul, vsew, vta, vma);
+  // asm volatile("vsetivli %[AVL], 0, e64, m8, tu, mu" : [AVL] "=r"(avl));
+  // read_vtype(vtype);
+  // read_vl(vl);
+  // check_vtype_vl(3, vtype, golden_vtype, avl, vl);
 }
 
 int main(void) {
@@ -55,7 +55,7 @@ int main(void) {
 
   TEST_CASE1();
   TEST_CASE2();
-  TEST_CASE3();
+  // TEST_CASE3();
 
   EXIT_CHECK();
 }

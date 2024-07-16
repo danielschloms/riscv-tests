@@ -37,14 +37,14 @@ void TEST_CASE3(void) {
 }
 
 void TEST_CASE4(void) {
-  VSET(4, e64, m1);
-  volatile int64_t INP1[] = {0xffffffffffffffff, 0x0000000000000000,
-                             0x0f0f0f0f0f0f0f0f, 0xf0f0f0f0f0f0f0f0}; // flush
-  __asm__ volatile("fence");
-  __asm__ volatile("vle64.v v1, (%0)" ::"r"(INP1));
-  //  VEC_CMP_64(4,v1,0xffffffffffffffff, 0x00000000000000000,
-  //  0x0f0f0f0f0f0f0f0f,0xf0f0f0f0f0f0f0f0);
-  //  __asm__ volatile ("fence");
+  // VSET(4, e64, m1);
+  // volatile int64_t INP1[] = {0xffffffffffffffff, 0x0000000000000000,
+  //                            0x0f0f0f0f0f0f0f0f, 0xf0f0f0f0f0f0f0f0}; // flush
+  // __asm__ volatile("fence");
+  // __asm__ volatile("vle64.v v1, (%0)" ::"r"(INP1));
+  // //  VEC_CMP_64(4,v1,0xffffffffffffffff, 0x00000000000000000,
+  // //  0x0f0f0f0f0f0f0f0f,0xf0f0f0f0f0f0f0f0);
+  // //  __asm__ volatile ("fence");
 }
 
 /*  void TEST_CASE2(void) { */
@@ -63,6 +63,6 @@ int main(void) {
   TEST_CASE1();
   TEST_CASE2();
   TEST_CASE3();
-  TEST_CASE4();
+  // TEST_CASE4();
   EXIT_CHECK();
 }

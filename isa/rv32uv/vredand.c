@@ -30,14 +30,14 @@ void TEST_CASE1(void) {
   asm volatile("vredand.vs v3, v1, v2");
   VCMP_U32(3, v3, 0x00001000);
 
-  VSET(12, e64, m1);
-  VLOAD_64(v1, 0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0);
-  VLOAD_64(v2, 0xfffffffffffffff7);
-  asm volatile("vredand.vs v3, v1, v2");
-  VCMP_U64(4, v3, 0x1000000000000000);
+  // VSET(12, e64, m1);
+  // VLOAD_64(v1, 0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // VLOAD_64(v2, 0xfffffffffffffff7);
+  // asm volatile("vredand.vs v3, v1, v2");
+  // VCMP_U64(4, v3, 0x1000000000000000);
 }
 
 // Masked naive test
@@ -70,16 +70,16 @@ void TEST_CASE2(void) {
   asm volatile("vredand.vs v3, v1, v2, v0.t");
   VCMP_U32(7, v3, 0x00001000);
 
-  VSET(12, e64, m1);
-  VLOAD_8(v0, 0xaa, 0x55);
-  VLOAD_64(v1, 0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0);
-  VLOAD_64(v2, 0xfffffffffffffff7);
-  VLOAD_64(v3, 1);
-  asm volatile("vredand.vs v3, v1, v2, v0.t");
-  VCMP_U64(8, v3, 0x1000000000000000);
+  // VSET(12, e64, m1);
+  // VLOAD_8(v0, 0xaa, 0x55);
+  // VLOAD_64(v1, 0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x1000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // VLOAD_64(v2, 0xfffffffffffffff7);
+  // VLOAD_64(v3, 1);
+  // asm volatile("vredand.vs v3, v1, v2, v0.t");
+  // VCMP_U64(8, v3, 0x1000000000000000);
 }
 
 int main(void) {

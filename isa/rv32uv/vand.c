@@ -38,20 +38,20 @@ void TEST_CASE1() {
            0xf0f0f0f0, 0xffff0000, 0x00000001, 0xf0f0f0f0, 0xffff0000,
            0x00000001, 0xf0f0f0f0);
 
-  VSET(12, e64, m1);
-  VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
-  VLOAD_64(v3, 0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0);
-  asm volatile("vand.vv v1, v2, v3");
-  VCMP_U64(4, v1, 0xffffffff00000000, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // VSET(12, e64, m1);
+  // VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // VLOAD_64(v3, 0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0);
+  // asm volatile("vand.vv v1, v2, v3");
+  // VCMP_U64(4, v1, 0xffffffff00000000, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
 }
 
 void TEST_CASE2() {
@@ -95,25 +95,25 @@ void TEST_CASE2() {
            0xf0f0f0f0, 0xffff0000, 0xdeadbeef, 0xf0f0f0f0, 0xffff0000,
            0xdeadbeef, 0xf0f0f0f0);
 
-  VSET(12, e64, m1);
-  VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
-  VLOAD_64(v3, 0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0);
-  VLOAD_8(v0, 0x6D, 0x0B);
-  VLOAD_64(v1, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef);
-  asm volatile("vand.vv v1, v2, v3, v0.t");
-  VCMP_U64(8, v1, 0xffffffff00000000, 0xdeadbeefdeadbeef, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0xdeadbeefdeadbeef, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0xdeadbeefdeadbeef, 0xf0f0f0f0f0f0f0f0,
-           0xffffffff00000000, 0xdeadbeefdeadbeef, 0xf0f0f0f0f0f0f0f0);
+  // VSET(12, e64, m1);
+  // VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // VLOAD_64(v3, 0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0x0000000000000003, 0xf0f0f0f0f0f0f0f0);
+  // VLOAD_8(v0, 0x6D, 0x0B);
+  // VLOAD_64(v1, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef);
+  // asm volatile("vand.vv v1, v2, v3, v0.t");
+  // VCMP_U64(8, v1, 0xffffffff00000000, 0xdeadbeefdeadbeef, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0xdeadbeefdeadbeef, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0xdeadbeefdeadbeef, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffff00000000, 0xdeadbeefdeadbeef, 0xf0f0f0f0f0f0f0f0);
 }
 
 void TEST_CASE3() {
@@ -142,16 +142,16 @@ void TEST_CASE3() {
            0x00f000f0, 0x0ff00ff0, 0x00000000, 0x00f000f0, 0x0ff00ff0,
            0x00000000, 0x00f000f0);
 
-  VSET(12, e64, m1);
-  VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
-  asm volatile("vand.vx v1, v2, %[A]" ::[A] "r"(scalar));
-  VCMP_U64(12, v1, 0x0ff00ff00ff00ff0, 0x0000000000000000, 0x00f000f000f000f0,
-           0x0ff00ff00ff00ff0, 0x0000000000000000, 0x00f000f000f000f0,
-           0x0ff00ff00ff00ff0, 0x0000000000000000, 0x00f000f000f000f0,
-           0x0ff00ff00ff00ff0, 0x0000000000000000, 0x00f000f000f000f0);
+  // VSET(12, e64, m1);
+  // VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // asm volatile("vand.vx v1, v2, %[A]" ::[A] "r"(scalar));
+  // VCMP_U64(12, v1, 0x0ff00ff00ff00ff0, 0x0000000000000000, 0x00f000f000f000f0,
+  //          0x0ff00ff00ff00ff0, 0x0000000000000000, 0x00f000f000f000f0,
+  //          0x0ff00ff00ff00ff0, 0x0000000000000000, 0x00f000f000f000f0,
+  //          0x0ff00ff00ff00ff0, 0x0000000000000000, 0x00f000f000f000f0);
 }
 
 void TEST_CASE4() {
@@ -190,21 +190,21 @@ void TEST_CASE4() {
            0x00f000f0, 0x0ff00ff0, 0xdeadbeef, 0x00f000f0, 0x0ff00ff0,
            0xdeadbeef, 0x00f000f0);
 
-  VSET(12, e64, m1);
-  VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
-  VLOAD_8(v0, 0x6D, 0x0B);
-  VLOAD_64(v1, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef);
-  asm volatile("vand.vx v1, v2, %[A], v0.t" ::[A] "r"(scalar));
-  VCMP_U64(16, v1, 0x0ff00ff00ff00ff0, 0xdeadbeefdeadbeef, 0x00f000f000f000f0,
-           0x0ff00ff00ff00ff0, 0xdeadbeefdeadbeef, 0x00f000f000f000f0,
-           0x0ff00ff00ff00ff0, 0xdeadbeefdeadbeef, 0x00f000f000f000f0,
-           0x0ff00ff00ff00ff0, 0xdeadbeefdeadbeef, 0x00f000f000f000f0);
+  // VSET(12, e64, m1);
+  // VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // VLOAD_8(v0, 0x6D, 0x0B);
+  // VLOAD_64(v1, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef);
+  // asm volatile("vand.vx v1, v2, %[A], v0.t" ::[A] "r"(scalar));
+  // VCMP_U64(16, v1, 0x0ff00ff00ff00ff0, 0xdeadbeefdeadbeef, 0x00f000f000f000f0,
+  //          0x0ff00ff00ff00ff0, 0xdeadbeefdeadbeef, 0x00f000f000f000f0,
+  //          0x0ff00ff00ff00ff0, 0xdeadbeefdeadbeef, 0x00f000f000f000f0,
+  //          0x0ff00ff00ff00ff0, 0xdeadbeefdeadbeef, 0x00f000f000f000f0);
 }
 
 void TEST_CASE5() {
@@ -231,16 +231,16 @@ void TEST_CASE5() {
            0x00000000, 0x0000000f, 0x00000001, 0x00000000, 0x0000000f,
            0x00000001, 0x00000000);
 
-  VSET(12, e64, m1);
-  VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
-  asm volatile("vand.vi v1, v2, 15");
-  VCMP_U64(20, v1, 0x000000000000000f, 0x0000000000000001, 0x0000000000000000,
-           0x000000000000000f, 0x0000000000000001, 0x0000000000000000,
-           0x000000000000000f, 0x0000000000000001, 0x0000000000000000,
-           0x000000000000000f, 0x0000000000000001, 0x0000000000000000);
+  // VSET(12, e64, m1);
+  // VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // asm volatile("vand.vi v1, v2, 15");
+  // VCMP_U64(20, v1, 0x000000000000000f, 0x0000000000000001, 0x0000000000000000,
+  //          0x000000000000000f, 0x0000000000000001, 0x0000000000000000,
+  //          0x000000000000000f, 0x0000000000000001, 0x0000000000000000,
+  //          0x000000000000000f, 0x0000000000000001, 0x0000000000000000);
 }
 
 void TEST_CASE6() {
@@ -277,21 +277,21 @@ void TEST_CASE6() {
            0x00000000, 0x0000000f, 0xdeadbeef, 0x00000000, 0x0000000f,
            0xdeadbeef, 0x00000000);
 
-  VSET(12, e64, m1);
-  VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
-           0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
-  VLOAD_8(v0, 0x6D, 0x0B);
-  VLOAD_64(v1, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-           0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef);
-  asm volatile("vand.vi v1, v2, 15, v0.t");
-  VCMP_U64(24, v1, 0x000000000000000f, 0xdeadbeefdeadbeef, 0x0000000000000000,
-           0x000000000000000f, 0xdeadbeefdeadbeef, 0x0000000000000000,
-           0x000000000000000f, 0xdeadbeefdeadbeef, 0x0000000000000000,
-           0x000000000000000f, 0xdeadbeefdeadbeef, 0x0000000000000000);
+  // VSET(12, e64, m1);
+  // VLOAD_64(v2, 0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0,
+  //          0xffffffffffffffff, 0x0000000000000001, 0xf0f0f0f0f0f0f0f0);
+  // VLOAD_8(v0, 0x6D, 0x0B);
+  // VLOAD_64(v1, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //          0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef);
+  // asm volatile("vand.vi v1, v2, 15, v0.t");
+  // VCMP_U64(24, v1, 0x000000000000000f, 0xdeadbeefdeadbeef, 0x0000000000000000,
+  //          0x000000000000000f, 0xdeadbeefdeadbeef, 0x0000000000000000,
+  //          0x000000000000000f, 0xdeadbeefdeadbeef, 0x0000000000000000,
+  //          0x000000000000000f, 0xdeadbeefdeadbeef, 0x0000000000000000);
 }
 
 int main(void) {

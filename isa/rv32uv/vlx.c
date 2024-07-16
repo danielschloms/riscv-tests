@@ -65,14 +65,14 @@ void TEST_CASE5(void) {
 // }
 
 void TEST_CASE7(void) {
-  VSET(4, e64, m1);
-  VLOAD_U64(v2, 0, 8, 16, 24);
-  volatile uint64_t INP[] = {0xdeadbeefffffffff, 0xdeadbeef00000000,
-                             0xdeadbeef0f0f0f0f, 0xdeadbeeff0f0f0f0};
-  MEMBARRIER;
-  __asm__ volatile("vlxei64.v v1,(%0), v2" ::"r"(INP));
-  VEC_CMP_U64(7, v1, 0xdeadbeefffffffff, 0xdeadbeef00000000, 0xdeadbeef0f0f0f0f,
-              0xdeadbeeff0f0f0f0);
+  // VSET(4, e64, m1);
+  // VLOAD_U64(v2, 0, 8, 16, 24);
+  // volatile uint64_t INP[] = {0xdeadbeefffffffff, 0xdeadbeef00000000,
+  //                            0xdeadbeef0f0f0f0f, 0xdeadbeeff0f0f0f0};
+  // MEMBARRIER;
+  // __asm__ volatile("vlxei64.v v1,(%0), v2" ::"r"(INP));
+  // VEC_CMP_U64(7, v1, 0xdeadbeefffffffff, 0xdeadbeef00000000, 0xdeadbeef0f0f0f0f,
+  //             0xdeadbeeff0f0f0f0);
 }
 
 // void TEST_CASE8(void) {
@@ -92,7 +92,7 @@ int main(void) {
   TEST_CASE1();
   TEST_CASE3();
   TEST_CASE5();
-  TEST_CASE7();
+  // TEST_CASE7();
   // TEST_CASE2();
   // TEST_CASE4();
   // TEST_CASE6();

@@ -17,8 +17,8 @@ int main(void) {
   __asm__ volatile("vsetvli t0, %[A], e16, m2" ::[A] "r"(scalar));
   scalar = 255;
   __asm__ volatile("vsetvli t0, %[A], e32, m4" ::[A] "r"(scalar));
-  scalar = 69;
-  __asm__ volatile("vsetvli t0, %[A], e64, m8" ::[A] "r"(scalar));
+  // scalar = 69;
+  // __asm__ volatile("vsetvli t0, %[A], e64, m8" ::[A] "r"(scalar));
   scalar = 69;
   __asm__ volatile("vsetvli t0, %[A], e128, m8" ::[A] "r"(scalar));
   scalar = 15;

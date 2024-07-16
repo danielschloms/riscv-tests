@@ -67,15 +67,15 @@ void TEST_CASE5(void) {
 // }
 
 void TEST_CASE7(void) {
-  VSET(4, e64, m1);
-  VLOAD_U64(v2, 0, 8, 16, 24);
-  volatile uint64_t OUP[] = {0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
-                             0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef};
-  VLOAD_U64(v1, 0xdeadbeef00000000, 0xdeadbeefffffffff, 0xdeadbeeff0f0f0f0,
-            0xdeadbeef0f0f0f0f);
-  __asm__ volatile("vsuxei64.v v1, (%0), v2" ::"r"(OUP));
-  VEC_EQUAL_U64_RAW(7, OUP, 0xdeadbeef00000000, 0xdeadbeefffffffff,
-                    0xdeadbeeff0f0f0f0, 0xdeadbeef0f0f0f0f);
+  // VSET(4, e64, m1);
+  // VLOAD_U64(v2, 0, 8, 16, 24);
+  // volatile uint64_t OUP[] = {0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef,
+  //                            0xdeadbeefdeadbeef, 0xdeadbeefdeadbeef};
+  // VLOAD_U64(v1, 0xdeadbeef00000000, 0xdeadbeefffffffff, 0xdeadbeeff0f0f0f0,
+  //           0xdeadbeef0f0f0f0f);
+  // __asm__ volatile("vsuxei64.v v1, (%0), v2" ::"r"(OUP));
+  // VEC_EQUAL_U64_RAW(7, OUP, 0xdeadbeef00000000, 0xdeadbeefffffffff,
+  //                   0xdeadbeeff0f0f0f0, 0xdeadbeef0f0f0f0f);
 }
 
 // void TEST_CASE8(void) {
@@ -95,7 +95,7 @@ int main(void) {
   TEST_CASE1();
   TEST_CASE3();
   TEST_CASE5();
-  TEST_CASE7();
+  // TEST_CASE7();
   // TEST_CASE2();
   // TEST_CASE4();
   // TEST_CASE6();

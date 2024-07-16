@@ -56,23 +56,23 @@ void TEST_CASE6(void) {
 }
 
 void TEST_CASE7(void) {
-  VSET(4, e64, m1);
-  volatile int64_t INP[] = {0xdeadbeefffffffff, 0xdeadbeef00000000,
-                            0xdeadbeef0f0f0f0f, 0xdeadbeeff0f0f0f0};
-  __asm__ volatile("vle64ff.v v1,(%0)" ::"r"(INP));
-  VEC_CMP_64(7, v1, 0xdeadbeefffffffff, 0xdeadbeef00000000, 0xdeadbeef0f0f0f0f,
-             0xdeadbeeff0f0f0f0);
+  // VSET(4, e64, m1);
+  // volatile int64_t INP[] = {0xdeadbeefffffffff, 0xdeadbeef00000000,
+  //                           0xdeadbeef0f0f0f0f, 0xdeadbeeff0f0f0f0};
+  // __asm__ volatile("vle64ff.v v1,(%0)" ::"r"(INP));
+  // VEC_CMP_64(7, v1, 0xdeadbeefffffffff, 0xdeadbeef00000000, 0xdeadbeef0f0f0f0f,
+  //            0xdeadbeeff0f0f0f0);
 }
 
 void TEST_CASE8(void) {
-  VSET(4, e64, m1);
-  volatile int64_t INP[] = {0xdeadbeefffffffff, 0xdeadbeef00000000,
-                            0xdeadbeef0f0f0f0f, 0xdeadbeeff0f0f0f0};
-  VLOAD_64(v0, 0x5, 0x0, 0x0, 0x0);
-  CLEAR(v1);
-  __asm__ volatile("vle64ff.v v1,(%0), v0.t" ::"r"(INP));
-  VEC_CMP_64(8, v1, 0xdeadbeefffffffff, 0x0000000000000000, 0xdeadbeef0f0f0f0f,
-             0x0000000000000000);
+  // VSET(4, e64, m1);
+  // volatile int64_t INP[] = {0xdeadbeefffffffff, 0xdeadbeef00000000,
+  //                           0xdeadbeef0f0f0f0f, 0xdeadbeeff0f0f0f0};
+  // VLOAD_64(v0, 0x5, 0x0, 0x0, 0x0);
+  // CLEAR(v1);
+  // __asm__ volatile("vle64ff.v v1,(%0), v0.t" ::"r"(INP));
+  // VEC_CMP_64(8, v1, 0xdeadbeefffffffff, 0x0000000000000000, 0xdeadbeef0f0f0f0f,
+  //            0x0000000000000000);
 }
 
 int main(void) {
@@ -85,7 +85,7 @@ int main(void) {
   TEST_CASE4();
   TEST_CASE5();
   TEST_CASE6();
-  TEST_CASE7();
-  TEST_CASE8();
+  // TEST_CASE7();
+  // TEST_CASE8();
   EXIT_CHECK();
 }

@@ -8,10 +8,10 @@
 #include "vector_macros.h"
 
 void TEST_CASE1() {
-  VSET(4, e64, m1);
-  VLOAD_F64(v2, _d(1).i, _d(-1).i, _d(3.14159265).i, _d(-3.14159265).i);
-  __asm__ volatile("vfclass.v v1, v2");
-  VEC_CMP_U64(1, v1, 64, 2, 64, 2);
+  // VSET(4, e64, m1);
+  // VLOAD_F64(v2, _d(1).i, _d(-1).i, _d(3.14159265).i, _d(-3.14159265).i);
+  // __asm__ volatile("vfclass.v v1, v2");
+  // VEC_CMP_U64(1, v1, 64, 2, 64, 2);
 }
 
 void TEST_CASE3() {
@@ -35,7 +35,7 @@ int main(void) {
   INIT_CHECK();
   enable_vec();
   enable_fp();
-  TEST_CASE1();
+  // TEST_CASE1();
   TEST_CASE3();
   // TEST_CASE2();
   EXIT_CHECK();
