@@ -13,6 +13,15 @@ void TEST_CASE1(void) {
   VLOAD_32(v2, 0x7ffffff0, -500, 3, 25);
   __asm__ volatile("vssub.vv v3, v1, v2" ::);
   VCMP_U32(1, v3, 0x80000000, 0x7fffffff, 12, -5);
+
+  // Saturation: vxsat must be 1
+  uint32_t vxsat;
+  READ_CSR(vxsat, vxsat);
+  if(!vxsat){
+    num_failed++;
+  }
+  WRITE_CSR_IMM(0, vxsat);
+
 }
 
 void TEST_CASE2(void) {
@@ -23,6 +32,14 @@ void TEST_CASE2(void) {
   VCLEAR(v3);
   __asm__ volatile("vssub.vv v3, v1, v2, v0.t" ::);
   VCMP_U32(1, v3, 0, 0x7fffffff, 0, -5);
+
+  // Saturation: vxsat must be 1
+  uint32_t vxsat;
+  READ_CSR(vxsat, vxsat);
+  if(!vxsat){
+    num_failed++;
+  }
+  WRITE_CSR_IMM(0, vxsat);
 }
 
 void TEST_CASE3(void) {
@@ -31,6 +48,14 @@ void TEST_CASE3(void) {
   const int64_t scalar = 5;
   __asm__ volatile("vssub.vx v3, v1, %[A]" ::[A] "r"(scalar));
   VCMP_U32(3, v3, 0, 0x80000000, 10, 15);
+
+  // Saturation: vxsat must be 1
+  uint32_t vxsat;
+  READ_CSR(vxsat, vxsat);
+  if(!vxsat){
+    num_failed++;
+  }
+  WRITE_CSR_IMM(0, vxsat);
 }
 
 void TEST_CASE4(void) {
@@ -41,6 +66,31 @@ void TEST_CASE4(void) {
   VCLEAR(v3);
   __asm__ volatile("vssub.vx v3, v1, %[A], v0.t" ::[A] "r"(scalar));
   VCMP_U32(4, v3, 0, 0x80000000, 0, 15);
+
+  // Saturation: vxsat must be 1
+  uint32_t vxsat;
+  READ_CSR(vxsat, vxsat);
+  if(!vxsat){
+    num_failed++;
+  }
+  WRITE_CSR_IMM(0, vxsat);
+}
+
+void TEST_CASE5(void) {
+  VSET(4, e32, m1);
+  VLOAD_32(v1, -10, 0x7FFFFFFC, 15, 20);
+  VLOAD_32(v2, 20, 500, 3, 25);
+  __asm__ volatile("vssub.vv v3, v1, v2" ::);
+  VCMP_U32(1, v3, -30, 0x7ffffe08, 12, -5);
+
+  // No saturation: vxsat must be 0
+  uint32_t vxsat;
+  READ_CSR(vxsat, vxsat);
+  if(vxsat){
+    num_failed++;
+  }
+  WRITE_CSR_IMM(0, vxsat);
+
 }
 
 int main(void) {
@@ -51,5 +101,6 @@ int main(void) {
   TEST_CASE2();
   TEST_CASE3();
   TEST_CASE4();
+  TEST_CASE5();
   EXIT_CHECK();
 }
