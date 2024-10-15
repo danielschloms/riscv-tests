@@ -166,6 +166,26 @@ int test_case;
     vec_name[i] = 0;                       \
   }                                        \
 
+#define READ_CSR(dest, csr) \
+  __asm__ volatile ("csrr %0, "#csr \
+                      : "=r" (dest)  /* output : register */ \
+                      : /* input : none */ \
+                      : /* clobbers: none */);
+
+#define WRITE_CSR(src, csr) \
+  __asm__ volatile ("csrw "#csr", %0" \
+                      : /* output: none */ \
+                      : "r" (src) /* input : from register */ \
+                      : /* clobbers: none */);
+
+#define WRITE_CSR_IMM(imm, csr) \
+  __asm__ volatile ("csrwi "#csr", %0" \
+                      : /* output: none */ \
+                      : "i" (imm) /* input : from register */ \
+                      : /* clobbers: none */);
+
+
+
 /***************************
  *  Type-dependant macros  *
  ***************************/
