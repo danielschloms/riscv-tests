@@ -85,7 +85,7 @@ void TEST_CASE5() {
   VLOAD_8(v2, -128, 127, -50);
   VLOAD_8(v3, -128, 10, 127);
   __asm__ volatile("vsmul.vv v1, v2, v3");
-  VCMP_I8(1, v1, 126, 10, -50);
+  VCMP_I8(1, v1, 127, 10, -50);
 
   // Saturation: vxsat must be 1
   uint32_t vxsat;
