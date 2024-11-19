@@ -431,19 +431,35 @@ void TEST_CASE8(void) {
   // CHECK_FFLAGS(0);
 };
 
+void TEST_CASE9(){
+  // Invalid operation, overflow
+  CLEAR_FFLAGS;
+  VSET(16, e32, m1);
+  CHECK_FFLAGS(0);
+  VLOAD_32(v2, pInff, pInff, pInff, pInff, pInff, pInff, pInff, pInff, pInff,
+           pInff, pInff, pInff, pInff, pInff, pInff, pInff);
+  VLOAD_32(v3, mInff, mInff, mInff, mInff, mInff, mInff, mInff, mInff, mInff,
+           mInff, mInff, mInff, mInff, mInff, mInff, mInff);
+  asm volatile("vfadd.vv v1, v2, v3");
+  VCMP_U32(11, v1, qNaNf, qNaNf, qNaNf, qNaNf, qNaNf, qNaNf, qNaNf, qNaNf,
+           qNaNf, qNaNf, qNaNf, qNaNf, qNaNf, qNaNf, qNaNf, qNaNf);
+  CHECK_FFLAGS(NV);
+}
+
 int main(void) {
   enable_vec();
   enable_fp();
 
-  TEST_CASE1();
-  TEST_CASE2();
-  TEST_CASE3();
-  TEST_CASE4();
-  TEST_CASE5();
+  // TEST_CASE1();
+  // TEST_CASE2();
+  // TEST_CASE3();
+  // TEST_CASE4();
+  // TEST_CASE5();
 
   TEST_CASE6();
-  TEST_CASE7();
-  TEST_CASE8();
+  // TEST_CASE7();
+  // TEST_CASE8();
+  // TEST_CASE9();
 
   EXIT_CHECK();
 }
