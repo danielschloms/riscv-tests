@@ -8,19 +8,16 @@
 #include "vector_macros.h"
 
 void TEST_CASE1() {
-  VSET(8, e8, m1);
-  VLOAD_8(v3, 8, 0, 0, 0, 0, 0, 0, 0);
-  __asm__ volatile("vmsbf.m v2, v3");
-  VCMP_U8(1, v2, 7, 0, 0, 0, 0, 0, 0, 0);
-}
-
-void TEST_CASE2() {
-  VSET(8, e8, m1);
-  VLOAD_8(v3, 8, 0, 0, 0, 0, 0, 0, 0);
-  VLOAD_8(v0, 3, 0, 0, 0, 0, 0, 0, 0);
-  VCLEAR(v2);
-  __asm__ volatile("vmsbf.m v2, v3, v0.t");
-  VCMP_U8(2, v2, 3, 0, 0, 0, 0, 0, 0, 0);
+  VSET(4, e32, m1);
+  VLOAD_32(v2, 7, 0, 0, 0);
+  VLOAD_32(v0, 5, 0, 0, 0);
+  volatile uint32_t scalar = 1337;
+  volatile uint32_t OUP[] = {0, 0, 0, 0};
+  __asm__ volatile("vcpop.m %[A], v2, v0.t \n"
+                   "sw %[A], (%1) \n"
+                   :
+                   : [A] "r"(scalar), "r"(OUP));
+  XCMP(1, OUP[0], 2);
 }
 
 int main(void) {
@@ -28,6 +25,5 @@ int main(void) {
   enable_vec();
   enable_fp();
   TEST_CASE1();
-  TEST_CASE2();
   EXIT_CHECK();
 }
